@@ -283,4 +283,12 @@ public class TunerConstants {
             );
         }
     }
+
+    public static class ShooterConstants {
+        public static final int leftshooterMotorID = 13;
+        public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+
+        public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withStatorCurrentLimitEnable(true);
+
+    }
 }
