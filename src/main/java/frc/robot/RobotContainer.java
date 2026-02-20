@@ -42,11 +42,14 @@ public class RobotContainer {
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
     private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandXboxController manipulatorController = new CommandXboxController(1);
+
     
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
     private ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    public ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem);
 
     public RobotContainer() {
         drivetrain.seedFieldCentric();
@@ -86,10 +89,13 @@ public class RobotContainer {
 
         // Reset the field-centric heading on left bumper press.
         joystick.leftBumper().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
+        
+        // joystick.rightTrigger(0.3).whileTrue(new ShooterCommand(shooterSubsystem));
 
         drivetrain.registerTelemetry(logger::telemeterize);
 
-
+        
+        
 
         
     }
