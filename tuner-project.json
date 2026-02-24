@@ -7,7 +7,7 @@
       "ModuleId": 0,
       "Encoder": {
         "Id": 9,
-        "Name": "Mod1_CANcoder",
+        "Name": "FL_CANcoder",
         "Model": "CANCoder",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -15,7 +15,7 @@
       },
       "SteerMotor": {
         "Id": 7,
-        "Name": "Mod1_Steer",
+        "Name": "FLSteer",
         "Model": "Talon FX vers. F",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -28,7 +28,7 @@
       },
       "DriveMotor": {
         "Id": 1,
-        "Name": "Mod1_Drive",
+        "Name": "FLDrive",
         "Model": "Talon FX vers. C",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -39,10 +39,10 @@
           "StatorCurrentLimit": 60
         }
       },
-      "IsEncoderInverted": true,
-      "IsSteerInverted": true,
+      "IsEncoderInverted": false,
+      "IsSteerInverted": false,
       "SelectedEncoderType": "CANcoder",
-      "EncoderOffset": -0.208984375,
+      "EncoderOffset": -0.205322265625,
       "DriveMotorSelectionState": 1,
       "SteerMotorSelectionState": 1,
       "SteerEncoderSelectionState": 1,
@@ -56,7 +56,7 @@
       "ModuleId": 1,
       "Encoder": {
         "Id": 12,
-        "Name": "Mod2_CANcoder",
+        "Name": "FR_CANcoder",
         "Model": "CANCoder",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -64,7 +64,7 @@
       },
       "SteerMotor": {
         "Id": 5,
-        "Name": "Mod2_Steer",
+        "Name": "FRSteer",
         "Model": "Talon FX vers. F",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -77,7 +77,7 @@
       },
       "DriveMotor": {
         "Id": 4,
-        "Name": "Mod2_Drive",
+        "Name": "FRDrive",
         "Model": "Talon FX vers. C",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -88,10 +88,10 @@
           "StatorCurrentLimit": 60
         }
       },
-      "IsEncoderInverted": true,
-      "IsSteerInverted": true,
+      "IsEncoderInverted": false,
+      "IsSteerInverted": false,
       "SelectedEncoderType": "CANcoder",
-      "EncoderOffset": 0.3935546875,
+      "EncoderOffset": 0.39697265625,
       "DriveMotorSelectionState": 1,
       "SteerMotorSelectionState": 1,
       "SteerEncoderSelectionState": 1,
@@ -105,7 +105,7 @@
       "ModuleId": 2,
       "Encoder": {
         "Id": 10,
-        "Name": "Mod3_CANcoder",
+        "Name": "BL_CANcoder",
         "Model": "CANCoder",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -113,7 +113,7 @@
       },
       "SteerMotor": {
         "Id": 3,
-        "Name": "Mod3_Steer",
+        "Name": "BLSteer",
         "Model": "Talon FX vers. F",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -126,7 +126,7 @@
       },
       "DriveMotor": {
         "Id": 6,
-        "Name": "Mod3_Drive",
+        "Name": "BLDrive",
         "Model": "Talon FX vers. C",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -137,10 +137,10 @@
           "StatorCurrentLimit": 60
         }
       },
-      "IsEncoderInverted": true,
-      "IsSteerInverted": true,
+      "IsEncoderInverted": false,
+      "IsSteerInverted": false,
       "SelectedEncoderType": "CANcoder",
-      "EncoderOffset": 0.4306640625,
+      "EncoderOffset": 0.43115234375,
       "DriveMotorSelectionState": 1,
       "SteerMotorSelectionState": 1,
       "SteerEncoderSelectionState": 1,
@@ -154,7 +154,7 @@
       "ModuleId": 3,
       "Encoder": {
         "Id": 11,
-        "Name": "Mod4_CANcoder",
+        "Name": "BR_CANcoder",
         "Model": "CANCoder",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -162,7 +162,7 @@
       },
       "SteerMotor": {
         "Id": 2,
-        "Name": "Mod4_Steer",
+        "Name": "BRSteer",
         "Model": "Talon FX vers. F",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -175,7 +175,7 @@
       },
       "DriveMotor": {
         "Id": 8,
-        "Name": "Mod4_Drive",
+        "Name": "BRDrive",
         "Model": "Talon FX vers. C",
         "CANbus": "rio",
         "CANbusFriendly": "",
@@ -186,10 +186,10 @@
           "StatorCurrentLimit": 60
         }
       },
-      "IsEncoderInverted": true,
-      "IsSteerInverted": true,
+      "IsEncoderInverted": false,
+      "IsSteerInverted": false,
       "SelectedEncoderType": "CANcoder",
-      "EncoderOffset": 0.23583984375,
+      "EncoderOffset": 0.234130859375,
       "DriveMotorSelectionState": 1,
       "SteerMotorSelectionState": 1,
       "SteerEncoderSelectionState": 1,
@@ -209,8 +209,8 @@
       "SelectedMotorType": null
     },
     "IsValidGyroCANbus": true,
-    "VerticalTrackSizeInches": 20.75,
-    "HorizontalTrackSizeInches": 20.75,
+    "VerticalTrackSizeInches": 21.0,
+    "HorizontalTrackSizeInches": 21.0,
     "WheelRadiusInches": 2.0,
     "IsLeftSideInverted": true,
     "IsRightSideInverted": false,
