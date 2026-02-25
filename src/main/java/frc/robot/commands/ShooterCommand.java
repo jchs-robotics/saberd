@@ -17,7 +17,11 @@ public class ShooterCommand extends Command {
     addRequirements(this.shooterSubsystem);
   }
 
-  // Called when the command is initially scheduled.
+  public ShooterCommand() {
+    //TODO Auto-generated constructor stub
+}
+
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
