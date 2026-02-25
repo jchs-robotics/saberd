@@ -28,16 +28,16 @@ public class ShooterCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSubsystem.LeftTopShooterTalonFX(-0.5);
+    shooterSubsystem.LeftTopShooterTalonFX(-1);
     System.out.println("LTShooter Running");
 
-    shooterSubsystem.LeftBottomShooterTalonFX(0.5);
+    shooterSubsystem.LeftBottomShooterTalonFX(1);
     System.out.println("LBShooter Running");
 
-    shooterSubsystem.RightTopShooterTalonFX(0.5);
+    shooterSubsystem.RightTopShooterTalonFX(1);
     System.out.println("RTShooter Running");
 
-    shooterSubsystem.RightBottomShooterTalonFX(-0.5);
+    shooterSubsystem.RightBottomShooterTalonFX(-1);
     System.out.println("RBShooter Running");
   }
 

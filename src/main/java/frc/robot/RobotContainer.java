@@ -18,6 +18,12 @@ import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.commands.IndexCommand;
+import frc.robot.commands.LeftCommand;
+import frc.robot.commands.RightCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -42,6 +48,17 @@ public class RobotContainer {
 
     public final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
     public final ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem);
+
+    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    public final LeftCommand leftCommand = new LeftCommand(new IntakeSubsystem());
+    public final RightCommand RightCommand = new RightCommand(new IntakeSubsystem());
+
+    public final IndexSubsystem indexSubsystem = new IndexSubsystem();
+    private final IndexCommand indexCommand = new IndexCommand(new IndexSubsystem());
+
+    public final ArmSubsystem armSubsystem = new ArmSubsystem();
+
+
 
     public RobotContainer() {
         configureBindings();
@@ -83,6 +100,15 @@ public class RobotContainer {
 
         // Run shooter
         joystick.rightTrigger(0.3).whileTrue(shooterCommand);
+
+        // run left intake
+        joystick.x().whileTrue(leftCommand);
+
+        // run right intake
+        joystick.b().whileTrue(RightCommand);
+
+        // run index
+        joystick.leftTrigger(0.3).whileTrue(indexCommand);
 
         //manual control testing
         //joystick.x().whileTrue(new InstantCommand(shooterSubsystem::shooterOn)).whileFalse(new InstantCommand(shooterSubsystem::shooterOff));

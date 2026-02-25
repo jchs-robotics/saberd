@@ -62,7 +62,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void LeftTopShooterTalonFX(double setpoint) {
-    LeftTopShooterTalonFX.set(-setpoint);
+    LeftTopShooterTalonFX.set(setpoint);
   }
 
   public void LeftBottomShooterTalonFX(double setpoint) {
@@ -74,6 +74,6 @@ public void RightTopShooterTalonFX(double setpoint) {
 }
 
 public void RightBottomShooterTalonFX(double setpoint) {
-    RightBottomShooterTalonFX.set(-setpoint);
+    RightBottomShooterTalonFX.set(setpoint);
 }
 }

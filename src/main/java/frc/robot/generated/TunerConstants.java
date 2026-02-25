@@ -284,6 +284,27 @@ public class TunerConstants {
         }
     }
 
+    public class ArmConstants {
+        public static final int LeftArmID = 19;
+        public static final int RightArmID = 21;
+        public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+        public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true);
+    }
+
+    public class IndexConstants {
+        public static final int IndexID = 14;
+        public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+        public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true);
+    }
+
+    public class IntakeConstants {
+        public static final int LeftIntakeID = 18;
+        public static final int RightIntakeID = 15;
+        public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+        public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true);
+        
+    }
+
     public class ShooterConstants {
 
     public static final int ltShooterID = 13;
@@ -296,6 +317,8 @@ public class TunerConstants {
     
     
 }
+
+
 }
 
 
