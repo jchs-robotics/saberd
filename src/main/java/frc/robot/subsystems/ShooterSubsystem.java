@@ -45,11 +45,11 @@ public class ShooterSubsystem extends SubsystemBase {
    * Method to run the shooter at a particular setpoint.
    * @param setpoint the percent output at which the shooter should run.
    */
-  public void runShooter(double power) {
-    LeftTopShooterTalonFX.set(-power);
-    LeftBottomShooterTalonFX.set(power);
-    RightTopShooterTalonFX.set(power);
-    RightBottomShooterTalonFX.set(-power);
+  public void runShooter(double setpoint) {
+    LeftTopShooterTalonFX.set(-setpoint);
+    LeftBottomShooterTalonFX.set(setpoint);
+    RightTopShooterTalonFX.set(setpoint);
+    RightBottomShooterTalonFX.set(-setpoint);
   }
 
   @Override
@@ -61,23 +61,19 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("RBShooter Percent Output", RightBottomShooterTalonFX.get());
   }
 
-  public void LeftTopShooterTalonFX(double power) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'LeftTopShooterTalonFX'");
+  public void LeftTopShooterTalonFX(double setpoint) {
+    LeftTopShooterTalonFX.set(-setpoint);
   }
 
-  public void LeftBottomShooterTalonFX(double power) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'LeftBottomShooterTalonFX'");
+  public void LeftBottomShooterTalonFX(double setpoint) {
+    LeftBottomShooterTalonFX.set(setpoint);
   }
 
-public void RightTopShooterTalonFX(double power) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'RightTopShooterTalonFX'");
+public void RightTopShooterTalonFX(double setpoint) {
+    RightTopShooterTalonFX.set(setpoint);
 }
 
-public void RightBottomShooterTalonFX(double power) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'RightBottomShooterTalonFX'");
+public void RightBottomShooterTalonFX(double setpoint) {
+    RightBottomShooterTalonFX.set(-setpoint);
 }
 }

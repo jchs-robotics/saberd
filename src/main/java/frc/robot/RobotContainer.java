@@ -82,7 +82,7 @@ public class RobotContainer {
         joystick.leftBumper().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
 
         // Run shooter
-        joystick.rightTrigger(0.3).whileTrue(new ShooterCommand());
+        joystick.rightTrigger(0.3).whileTrue(shooterCommand);
 
         //manual control testing
         //joystick.x().whileTrue(new InstantCommand(shooterSubsystem::shooterOn)).whileFalse(new InstantCommand(shooterSubsystem::shooterOff));
