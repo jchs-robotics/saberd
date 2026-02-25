@@ -262,10 +262,10 @@ public class TunerConstants {
          *                                  unspecified or set to 0 Hz, this is 250 Hz on
          *                                  CAN FD, and 100 Hz on CAN 2.0.
          * @param odometryStandardDeviation The standard deviation for odometry calculation
-         *                                  in the form [x, y, theta]áµ€, with units in meters
+         *                                  in the form [x, y, theta]ᵀ, with units in meters
          *                                  and radians
          * @param visionStandardDeviation   The standard deviation for vision calculation
-         *                                  in the form [x, y, theta]áµ€, with units in meters
+         *                                  in the form [x, y, theta]ᵀ, with units in meters
          *                                  and radians
          * @param modules                   Constants for each specific module
          */
@@ -283,4 +283,23 @@ public class TunerConstants {
             );
         }
     }
+
+    public class ShooterConstants {
+
+    public static final int ltShooterID = 13;
+    public static final int lbShooterID = 23;
+    public static final int rtShooterID = 16;
+    public static final int rbShooterID = 17;
+    public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+    public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true);
+
+    
+    
 }
+}
+
+
+
+
+
+
