@@ -22,8 +22,10 @@ import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.commands.IndexCommand;
-import frc.robot.commands.LeftCommand;
-import frc.robot.commands.RightCommand;
+import frc.robot.commands.LeftArmCommand;
+import frc.robot.commands.LeftIntCommand;
+import frc.robot.commands.RightArmCommand;
+import frc.robot.commands.RightIntCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -50,14 +52,15 @@ public class RobotContainer {
     public final ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem);
 
     public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    public final LeftCommand leftCommand = new LeftCommand(new IntakeSubsystem());
-    public final RightCommand RightCommand = new RightCommand(new IntakeSubsystem());
+    public final LeftIntCommand leftCommand = new LeftIntCommand(new IntakeSubsystem());
+    public final RightIntCommand rightCommand = new RightIntCommand(new IntakeSubsystem());
 
     public final IndexSubsystem indexSubsystem = new IndexSubsystem();
     private final IndexCommand indexCommand = new IndexCommand(new IndexSubsystem());
 
     public final ArmSubsystem armSubsystem = new ArmSubsystem();
-
+    private final LeftArmCommand leftArmCommand = new LeftArmCommand(new ArmSubsystem());
+    private final RightArmCommand rightArmCommand = new RightArmCommand(new ArmSubsystem());
 
 
     public RobotContainer() {
@@ -94,7 +97,7 @@ public class RobotContainer {
         // joystick.back().and(joystick.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
         // joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         // joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
-
+        
         // Reset the field-centric heading on left bumper press.
         joystick.leftBumper().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
 
@@ -105,10 +108,16 @@ public class RobotContainer {
         joystick.x().whileTrue(leftCommand);
 
         // run right intake
-        joystick.b().whileTrue(RightCommand);
+        joystick.b().whileTrue(rightCommand);
 
-        // run index
+        // run index (internal into shooter)
         joystick.leftTrigger(0.3).whileTrue(indexCommand);
+
+        //run left arm
+        joystick.a().whileTrue(leftArmCommand);
+
+        //run right arm
+        joystick.y().whileTrue(rightArmCommand);
 
         //manual control testing
         //joystick.x().whileTrue(new InstantCommand(shooterSubsystem::shooterOn)).whileFalse(new InstantCommand(shooterSubsystem::shooterOff));

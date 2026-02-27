@@ -7,13 +7,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 
-
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class RightCommand extends Command {
-  /** Creates a new RightCommand. */
+public class LeftIntCommand extends Command {
+  /** Creates a new LeftCommand. */
   private IntakeSubsystem intakeSubsystem;
 
-  public RightCommand(IntakeSubsystem intakeSubsystem) {
+  public LeftIntCommand(IntakeSubsystem intakeSubsystem) {
     this.intakeSubsystem = intakeSubsystem;
     addRequirements(intakeSubsystem);
   }
@@ -25,15 +24,15 @@ public class RightCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSubsystem.RightIntakeTalonFX(0.5);
-    System.out.println("Right Intake Running");
+    intakeSubsystem.LeftIntakeTalonFX(0.5);
+    System.out.println("Left Intake Running");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intakeSubsystem.RightIntakeTalonFX(0);
-    System.out.println("Right Intake Stopped");
+    intakeSubsystem.LeftIntakeTalonFX(0);
+    System.out.println("Left Intake Stopped");
   }
 
   // Returns true when the command should end.
