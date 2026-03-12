@@ -37,7 +37,45 @@ public class IntakeSubsystem extends SubsystemBase {
     LeftIntakeTalonFX.set(setpoint);
   }
 
+  private boolean leftIntakeRunning = false;
+  private double lintakeSpeed = 0.7;
+
+  public void toggleLeftIntake() {
+    leftIntakeRunning = !leftIntakeRunning;
+
+    if (leftIntakeRunning) {
+      LeftIntakeTalonFX(lintakeSpeed);
+    } else {
+      LeftIntakeTalonFX(0);
+    }
+  }
+
+  public void stopLeftIntake() {
+    leftIntakeRunning = false;
+    LeftIntakeTalonFX(0);
+  }
+
+  private boolean rightIntakeRunning = false;
+  private double rintakeSpeed = -0.7;
+
+  public void toggleRightIntake() {
+    rightIntakeRunning = !rightIntakeRunning;
+
+    if (rightIntakeRunning) {
+      RightIntakeTalonFX(rintakeSpeed);
+    } else {
+      RightIntakeTalonFX(0);
+    }
+  }
+
+  public void stopRightIntake() {
+    rightIntakeRunning = false;
+    RightIntakeTalonFX(0);
+  }
+
   public void RightIntakeTalonFX(double setpoint) {
     RightIntakeTalonFX.set(setpoint);
   }
+
+  
 }

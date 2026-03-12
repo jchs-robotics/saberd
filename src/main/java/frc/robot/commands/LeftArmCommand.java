@@ -18,7 +18,7 @@ public class LeftArmCommand extends Command {
 
     @Override
     public void execute() {
-        armSubsystem.LeftArmTalonFX(0.5);
+        armSubsystem.LeftArmTalonFX(-0.2);
         System.out.println("Left Arm Running");
     }
 

@@ -9,6 +9,7 @@ import static edu.wpi.first.units.Units.*;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -16,19 +17,38 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ProxyCommand;
+import edu.wpi.first.wpilibj2.command.RepeatCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.commands.HoodCommand;
 import frc.robot.commands.IndexCommand;
 import frc.robot.commands.LeftArmCommand;
-import frc.robot.commands.LeftIntCommand;
+import frc.robot.commands.LeftArmForwardToggleIntakeCmd;
+import frc.robot.commands.LeftArmReverseStopIntakeCmd;
+import frc.robot.commands.LeftIntakeCommand;
+// import frc.robot.commands.PIDRightArmDownCommand;
 import frc.robot.commands.RightArmCommand;
-import frc.robot.commands.RightIntCommand;
+import frc.robot.commands.RightArmForwardToggleIntakeCmd;
+import frc.robot.commands.RightArmReverseStopIntakeCmd;
+import frc.robot.commands.RightIntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.HoodSubsystem;
+import frc.robot.subsystems.HangSubsystem;
+import frc.robot.commands.HangDownCommand;
+import frc.robot.commands.HangUpCommand;
+// import frc.robot.commands.SetLeftArmAngleCmd;
+// import frc.robot.commands.SetRightArmAngleCmd;
 
 public class RobotContainer {
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -52,15 +72,31 @@ public class RobotContainer {
     public final ShooterCommand shooterCommand = new ShooterCommand(shooterSubsystem);
 
     public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    public final LeftIntCommand leftCommand = new LeftIntCommand(new IntakeSubsystem());
-    public final RightIntCommand rightCommand = new RightIntCommand(new IntakeSubsystem());
+    public final LeftIntakeCommand leftCommand = new LeftIntakeCommand(new IntakeSubsystem());
+    public final RightIntakeCommand rightCommand = new RightIntakeCommand(new IntakeSubsystem());
 
     public final IndexSubsystem indexSubsystem = new IndexSubsystem();
     private final IndexCommand indexCommand = new IndexCommand(new IndexSubsystem());
 
     public final ArmSubsystem armSubsystem = new ArmSubsystem();
+    // private final SetLeftArmAngleCmd setLeftArmAngleCmd = new SetLeftArmAngleCmd(armSubsystem, MaxAngularRate);
+    // private final SetRightArmAngleCmd setRightArmAngleCmd = new SetRightArmAngleCmd(armSubsystem, MaxAngularRate);
+    //private final PIDRightArmDownCommand pidRightArmDownCommand = new PIDRightArmDownCommand(new ArmSubsystem());
     private final LeftArmCommand leftArmCommand = new LeftArmCommand(new ArmSubsystem());
     private final RightArmCommand rightArmCommand = new RightArmCommand(new ArmSubsystem());
+    private final LeftArmForwardToggleIntakeCmd leftArmForwardToggleIntakeCmd = new LeftArmForwardToggleIntakeCmd(armSubsystem, intakeSubsystem);
+    private final LeftArmReverseStopIntakeCmd leftArmReverseStopIntakeCmd = new LeftArmReverseStopIntakeCmd(armSubsystem, intakeSubsystem);
+    private final RightArmForwardToggleIntakeCmd rightArmForwardToggleIntakeCmd = new RightArmForwardToggleIntakeCmd(armSubsystem, intakeSubsystem);
+    private final RightArmReverseStopIntakeCmd rightArmReverseStopIntakeCmd = new RightArmReverseStopIntakeCmd(armSubsystem, intakeSubsystem);
+
+    public final HoodSubsystem hoodSubsystem = new HoodSubsystem();
+    private final HoodCommand hoodCommand = new HoodCommand(new HoodSubsystem());
+
+    public final HangSubsystem hangSubsystem = new HangSubsystem();
+    private final HangUpCommand hangUpCommand = new HangUpCommand(new HangSubsystem());
+    private final HangDownCommand hangDownCommand = new HangDownCommand(new HangSubsystem());
+
+    DutyCycleEncoder m_encoder = new DutyCycleEncoder(9);
 
 
     public RobotContainer() {
@@ -97,7 +133,7 @@ public class RobotContainer {
         // joystick.back().and(joystick.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
         // joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         // joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
-        
+
         // Reset the field-centric heading on left bumper press.
         joystick.leftBumper().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
 
@@ -105,19 +141,38 @@ public class RobotContainer {
         joystick.rightTrigger(0.3).whileTrue(shooterCommand);
 
         // run left intake
-        joystick.x().whileTrue(leftCommand);
+        // joystick.x().whileTrue(leftCommand);
 
         // run right intake
-        joystick.b().whileTrue(rightCommand);
+        // joystick.b().whileTrue(rightCommand);
 
         // run index (internal into shooter)
-        joystick.leftTrigger(0.3).whileTrue(indexCommand);
+        joystick.leftTrigger(0.5).whileTrue(indexCommand);
 
         //run left arm
-        joystick.a().whileTrue(leftArmCommand);
+        joystick.x().whileTrue(leftArmCommand);
+        // joystick.a().whileTrue(setLeftArmAngleCmd);
 
         //run right arm
-        joystick.y().whileTrue(rightArmCommand);
+        joystick.a().whileTrue(rightArmCommand);
+
+        // joystick.y().whileTrue(setRightArmAngleCmd);
+
+        // run hood
+        // joystick.povRight().whileTrue(hoodCommand);
+
+        manipulatorController.povUp().whileTrue(hangUpCommand);
+
+        manipulatorController.povDown().whileTrue(hangDownCommand);
+
+
+        // left/right arms/intakes commands
+        joystick.povLeft().whileTrue(new LeftArmForwardToggleIntakeCmd(armSubsystem, intakeSubsystem));
+        joystick.povUp().whileTrue(new LeftArmReverseStopIntakeCmd(armSubsystem, intakeSubsystem));
+        joystick.b().whileTrue(new RightArmForwardToggleIntakeCmd(armSubsystem, intakeSubsystem));
+        joystick.y().whileTrue(new RightArmReverseStopIntakeCmd(armSubsystem, intakeSubsystem));
+
+        // joystick.y().whileTrue(new PIDRightArmDownCommand(armSubsystem, MaxAngularRate));
 
         //manual control testing
         //joystick.x().whileTrue(new InstantCommand(shooterSubsystem::shooterOn)).whileFalse(new InstantCommand(shooterSubsystem::shooterOff));

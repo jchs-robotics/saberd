@@ -5,18 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.HangSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class IndexCommand extends Command {
-  
-  /** Creates a new IndexCommand. */
-  private IndexSubsystem indexSubsystem;
-  public IndexCommand(IndexSubsystem indexSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.indexSubsystem = indexSubsystem;
-    addRequirements(indexSubsystem);
+public class HangUpCommand extends Command {
+  /** Creates a new HangCommand. */
+  private HangSubsystem hangSubsystem;
 
+  public HangUpCommand(HangSubsystem hangSubsystem) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.hangSubsystem = hangSubsystem;
+    addRequirements(hangSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,16 +25,21 @@ public class IndexCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    indexSubsystem.IndexTalonFX(-1);
-    System.out.println("Index Running");
+    hangSubsystem.LeftHangTalonFX(-0.2);
+    System.out.println("Left Hang Running");
+
+    hangSubsystem.RightHangTalonFX(0.2);
+    System.out.println("Right Hang Running");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    indexSubsystem.IndexTalonFX(0);
-    System.out.println("Index Stopped");
+    hangSubsystem.LeftHangTalonFX(0);
+    System.out.println("Left Hang Stopped");
 
+    hangSubsystem.RightHangTalonFX(0);
+    System.out.println("Right Hang Stopped");
   }
 
   // Returns true when the command should end.

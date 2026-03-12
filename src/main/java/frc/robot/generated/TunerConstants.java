@@ -284,11 +284,31 @@ public class TunerConstants {
         }
     }
 
+    public class HoodConstants {
+        public static final int HoodID = 20;
+        public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+        public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true);
+    }
+
     public class ArmConstants {
         public static final int LeftArmID = 19;
         public static final int RightArmID = 21;
         public static final TalonFXConfiguration configs = new TalonFXConfiguration();
         public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true);
+        
+        // Gear ratio (motor rotations per arm rotation)
+        public static final double GEAR_RATIO = 50.0 / 18.0;
+
+        // Angle limits
+        public static final double MIN_ANGLE_DEG = 0.0;
+        public static final double MAX_ANGLE_DEG = 120.0;
+
+        // Vertical position definition
+        public static final double VERTICAL_DEG = 90.0;
+
+        // Motion Magic
+        public static final double CRUISE_VELOCITY = 60; // deg/sec
+        public static final double ACCELERATION = 120;   // deg/sec^2
     }
 
     public class IndexConstants {
@@ -316,6 +336,13 @@ public class TunerConstants {
 
     
     
+}
+
+public class HangConstants {
+    public static final int LeftHangID = 24;
+    public static final int RightHangID = 25;
+    public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+    public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs().withStatorCurrentLimit(80).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true);
 }
 
 

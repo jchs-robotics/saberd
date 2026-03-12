@@ -16,7 +16,7 @@ public class RightArmCommand extends Command {
 
     @Override
     public void execute() {
-        armSubsystem.RightArmTalonFX(1);
+        armSubsystem.RightArmTalonFX(0.2);
         System.out.println("Right Arm Running");
     }
     

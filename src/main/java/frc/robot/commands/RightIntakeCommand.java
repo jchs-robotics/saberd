@@ -5,18 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class IndexCommand extends Command {
-  
-  /** Creates a new IndexCommand. */
-  private IndexSubsystem indexSubsystem;
-  public IndexCommand(IndexSubsystem indexSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.indexSubsystem = indexSubsystem;
-    addRequirements(indexSubsystem);
+public class RightIntakeCommand extends Command {
+  /** Creates a new RightCommand. */
+  private IntakeSubsystem intakeSubsystem;
 
+  public RightIntakeCommand(IntakeSubsystem intakeSubsystem) {
+    this.intakeSubsystem = intakeSubsystem;
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,16 +25,15 @@ public class IndexCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    indexSubsystem.IndexTalonFX(-1);
-    System.out.println("Index Running");
+    intakeSubsystem.RightIntakeTalonFX(0.5);
+    System.out.println("Right Intake Running");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    indexSubsystem.IndexTalonFX(0);
-    System.out.println("Index Stopped");
-
+    intakeSubsystem.RightIntakeTalonFX(0);
+    System.out.println("Right Intake Stopped");
   }
 
   // Returns true when the command should end.
